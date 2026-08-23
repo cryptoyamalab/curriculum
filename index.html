@@ -1,97 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M - </title>
-    <link rel="stylesheet" href="style.css">
+    <title>Pokémon CV Collection</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #1a1a24;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { margin-bottom: 8px; font-size: 2rem; }
+        p { color: #a0a0b0; margin-bottom: 30px; }
+        .grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: #252535;
+            border-radius: 16px;
+            padding: 24px;
+            width: 240px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card.pikachu:hover { border-color: #fcd116; box-shadow: 0 8px 20px rgba(252, 209, 22, 0.25); }
+        .card.snorlax:hover { border-color: #2d5d6b; box-shadow: 0 8px 20px rgba(45, 93, 107, 0.35); }
+        .icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #1a1a24;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="snorlax-container">
-        <!-- Header -->
-        <header class="snorlax-header">
-            <div class="header-main">
-                <h1></h1>
-                <p class="subtitle"></p>
-            </div>
-            <div class="contact-box">
-                <p></p>
-                <p></p>
-                </div>
-        </header>
+    <h1>🎮 Pokémon CV Template Collection</h1>
+    <p>Selecciona una plantilla para ver el portafolio temático:</p>
 
-        <!-- Bio / Summary -->
-        <section class="snorlax-section">
-            <h2>[ BIO ]</h2>
-             </section>
+    <div class="grid">
+        <a href="./pikachu/index.html" class="card pikachu">
+            <div class="icon">⚡</div>
+            <h3>Pikachu Edition</h3>
+            <p style="font-size: 0.85rem;">Tema Eléctrico</p>
+            <span class="btn">Ver Template</span>
+        </a>
 
-        <!-- Skill Tree -->
-        <section class="snorlax-section">
-            <h2>[ SKILL TREE ]</h2>
-            <div class="skills-grid">
-               
-            </div>
-        </section>
-
-        <!-- Main Quests (Experience) -->
-        <section class="snorlax-section">
-            <h2>[ MAIN QUESTS / EXPERIENCE ]</h2>
-            
-            <div class="job-card">
-                <div class="job-meta">
-                    <strong></strong> — 
-                    <span></span>
-                </div>
-                <ul>
-                   
-                </ul>
-            </div>
-
-            <div class="job-card">
-                <div class="job-meta">
-                    <strong></strong> —
-                    <span></span>
-                </div>
-                <ul>
-                   
-                </ul>
-            </div>
-
-            <div class="job-card">
-                <div class="job-meta">
-                    <strong></strong> — 
-                    <span></span>
-                </div>
-                <ul>
-                   
-                </ul>
-            </div>
-
-            <div class="job-card">
-                <div class="job-meta">
-                    <strong></strong> —
-                    <span></span>
-                </div>
-                <ul>
-                   
-                </ul>
-            </div>
-        </section>
-
-        <!-- Side Quests (Education) -->
-        <section class="snorlax-section">
-            <h2>[ SIDE QUESTS / EDUCATION ]</h2>
-
-            <div class="edu-card">
-                <strong></strong>
-            </div>
-        </section>
-
-        <!-- Updated Button -->
-        <footer class="snorlax-footer">
-            <button id="snorlax-btn">Gotta Catch 'Em All!</button>
-        </footer>
+        <a href="./snorlax/index.html" class="card snorlax">
+            <div class="icon">💤</div>
+            <h3>Snorlax Edition</h3>
+            <p style="font-size: 0.85rem;">Tema Normal / Tanque</p>
+            <span class="btn">Ver Template</span>
+        </a>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
