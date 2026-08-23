@@ -1,18 +1,32 @@
+# 🎮 Pokémon Themed CV & Resume Collection
 
-# 💤 Snorlax Edition - Interactive IT Resume
+A multi-theme collection of creative, gamified developer CV and resume templates built with semantic **HTML5**, **CSS3**, and vanilla **JavaScript**. Each template features distinct palettes, layout cards, and interactive battle moves.
 
-An interactive, responsive, and minimalist web-based resume inspired by the aesthetics of **Snorlax**. This project showcases professional IT support experience, leadership capabilities, and core technical skills using a clean, modern single-page layout.
+---
 
-## 🚀 Live Preview
-If you want to view the fully rendered design, check out the repository or open the `index.html` file directly in any modern browser.
+## 🌟 Available Themes
 
-## 🛠️ Tech Stack
-*   **HTML5** - Structured semantic layout.
-*   **CSS3** - Customized Snorlax color palette (Teal, Cream, and Soft Sand), responsive flexbox grids, and custom pill-shaped badge designs.
-*   **JavaScript (ES6)** - Basic interactivity for action elements.
+| Pokémon | Theme Focus | Key Features | Path |
+| :--- | :--- | :--- | :--- |
+| **⚡ Pikachu** | Electric / High Energy | Yellow & red palette, high-contrast borders, Thunderbolt animation | [`/pikachu`](./pikachu/) |
+| **💤 Snorlax** | Tank / Resilient | Forest teal & cream palette, stamina badges, Rest & Hyper Beam toggle | [`/snorlax`](./snorlax/) |
 
-## 🗂️ Project Structure
+---
+
+## 📁 Repository Structure
+
 ```text
-├── index.html       # Main workspace containing profile information and layout
-├── style.css        # Snorlax-inspired stylesheets, typography, and responsive design
-└── script.js        # Event listeners for interactive button controls
+curriculum/
+│
+├── index.html            # Hub launcher / Template selector page
+├── README.md             # Project documentation
+│
+├── pikachu/              # Pikachu Edition Template
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+└── snorlax/              # Snorlax Edition Template
+    ├── index.html
+    ├── style.css
+    └── script.js
