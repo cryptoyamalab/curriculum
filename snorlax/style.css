@@ -1,0 +1,158 @@
+:root {
+    --snorlax-teal: #2d5d6b;     /* El azul turquesa característico de Snorlax */
+    --snorlax-cream: #f7e6c4;    /* El tono crema de su cara y panza */
+    --snorlax-dark: #1b363f;     /* Sombra oscura */
+    --snorlax-bg: #e4ecef;       /* Fondo suave */
+    --text-color: #222222;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--snorlax-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.snorlax-container {
+    max-width: 800px;
+    width: 100%;
+    background-color: var(--snorlax-cream);
+    border: 8px solid var(--snorlax-teal);
+    border-radius: 24px;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 12px 30px rgba(27, 54, 63, 0.2);
+}
+
+.snorlax-header {
+    background-color: var(--snorlax-teal);
+    color: var(--snorlax-cream);
+    padding: 25px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.header-main h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.header-main .subtitle {
+    margin: 5px 0 0 0;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.contact-box p {
+    margin: 3px 0;
+    font-size: 0.9rem;
+}
+
+.contact-box a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.snorlax-section {
+    margin-bottom: 25px;
+}
+
+.snorlax-section h2 {
+    color: var(--snorlax-teal);
+    font-size: 1.1rem;
+    margin-top: 0;
+    border-bottom: 3px solid var(--snorlax-teal);
+    padding-bottom: 4px;
+    display: inline-block;
+}
+
+.snorlax-section p {
+    line-height: 1.5;
+    font-size: 0.95rem;
+    margin: 8px 0;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.skill-tag {
+    background-color: var(--snorlax-teal);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.job-card {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--snorlax-teal);
+}
+
+.job-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.job-card ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.job-card li {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.edu-card {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.snorlax-footer {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#snorlax-btn {
+    background-color: var(--snorlax-teal);
+    color: var(--snorlax-cream);
+    border: none;
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+#snorlax-btn:hover {
+    background-color: var(--snorlax-dark);
+    transform: translateY(-2px);
+}
