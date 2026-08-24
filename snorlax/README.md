@@ -11,4 +11,4 @@ JavaScript (ES6) - Basic interactivity for action elements.
 🗂️ Project Structure
 ├── index.html       # Main workspace containing profile information and layout
 ├── style.css        # Snorlax-inspired stylesheets, typography, and responsive design
-└── script.js        # Event listeners for interactive button controls
+└── script.js        # Event listeners for interactive button controls, adding animations according to Pokemon characters.
