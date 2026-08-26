@@ -1,0 +1,250 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mewtwo - Ficha de Datos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #180d2b 0%, #0d0614 100%);
+            color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            background: rgba(30, 20, 50, 0.85);
+            border: 2px solid #8e44ad;
+            box-shadow: 0 0 25px rgba(155, 89, 182, 0.4);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            padding: 24px;
+            backdrop-filter: blur(8px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #5e2a84;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #d6a2e8;
+            letter-spacing: 1px;
+        }
+
+        .type-badge {
+            background-color: #9b59b6;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(186, 104, 200, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-section {
+            background: rgba(18, 10, 30, 0.7);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .stat-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            color: #a29bfe;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .moves-section h3 {
+            font-size: 1rem;
+            color: #d6a2e8;
+            margin-bottom: 10px;
+            border-left: 3px solid #9b59b6;
+            padding-left: 8px;
+        }
+
+        .moves-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .move-btn {
+            background: #2d1847;
+            border: 1px solid #7d3c98;
+            color: #e0d0f5;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .move-btn:hover {
+            background: #6c3483;
+            color: #fff;
+            box-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+        }
+
+        .log-box {
+            background: #09040e;
+            border: 1px solid #4a235a;
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 48px;
+            font-size: 0.85rem;
+            color: #bbf7d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="header">
+            <h1 id="pk-nombre">Mewtwo</h1>
+            <span class="type-badge" id="pk-tipo">Psíquico</span>
+        </div>
+
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" alt="Mewtwo">
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-row">
+                <span class="stat-label">Nivel:</span>
+                <span class="stat-value" id="pk-nivel">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Naturaleza:</span>
+                <span class="stat-value" id="pk-naturaleza">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Puntos de Salud (PS):</span>
+                <span class="stat-value" id="pk-ps">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Ataque Especial:</span>
+                <span class="stat-value" id="pk-spatk">--</span>
+            </div>
+        </div>
+
+        <div class="moves-section">
+            <h3>Movimientos</h3>
+            <div class="moves-grid" id="moves-container">
+                <!-- Se llenan dinámicamente con JS -->
+            </div>
+        </div>
+
+        <div class="log-box" id="battle-log">
+            Listo para el combate.
+        </div>
+    </div>
+
+    <script>
+        class Mewtwo {
+            constructor(nivel = 70, naturaleza = "Modest") {
+                this.nombre = "Mewtwo";
+                this.tipo = ["Psíquico"];
+                this.nivel = nivel;
+                this.naturaleza = naturaleza;
+                this.ps = Math.floor((106 * 2 * nivel) / 100) + nivel + 10;
+                this.ataqueEspecial = Math.floor((154 * 2 * nivel) / 100) + 5;
+                this.movimientos = ["Onda Mental", "Bola Sombra", "Recuperación", "Rayo Hielo"];
+            }
+
+            atacar(movimiento) {
+                if (this.movimientos.includes(movimiento)) {
+                    return `${this.nombre} usó ${movimiento} con potencia ${this.ataqueEspecial}!`;
+                }
+                return `${this.nombre} no conoce ${movimiento}.`;
+            }
+        }
+
+        // Instancia del objeto Mewtwo
+        const miMewtwo = new Mewtwo(100, "Timid");
+
+        // Vincular con el DOM (HTML)
+        document.getElementById("pk-nombre").innerText = miMewtwo.nombre;
+        document.getElementById("pk-tipo").innerText = miMewtwo.tipo.join(" / ");
+        document.getElementById("pk-nivel").innerText = miMewtwo.nivel;
+        document.getElementById("pk-naturaleza").innerText = miMewtwo.naturaleza;
+        document.getElementById("pk-ps").innerText = miMewtwo.ps;
+        document.getElementById("pk-spatk").innerText = miMewtwo.ataqueEspecial;
+
+        const logElement = document.getElementById("battle-log");
+        const movesContainer = document.getElementById("moves-container");
+
+        miMewtwo.movimientos.forEach(mov => {
+            const btn = document.createElement("button");
+            btn.className = "move-btn";
+            btn.innerText = mov;
+            btn.onclick = () => {
+                logElement.innerText = miMewtwo.atacar(mov);
+            };
+            movesContainer.appendChild(btn);
+        });
+    </script>
+</body>
+</html>
+"""
+
+with open("mewtwo_card.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("HTML generado exitosamente")
