@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mewtwo - Card Interactiva</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #241442 0%, #0a0412 100%);
+            color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(26, 16, 43, 0.9);
+            border: 2px solid #8e44ad;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.35);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #4a235a;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #e8d5f5;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            background: #9b59b6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .image-box {
+            text-align: center;
+            margin: 10px 0 16px 0;
+        }
+
+        .image-box img {
+            width: 170px;
+            height: 170px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 16px rgba(186, 104, 200, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .image-box img:hover {
+            transform: scale(1.08) translateY(-4px);
+        }
+
+        .stats-grid {
+            background: rgba(14, 7, 24, 0.75);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(142, 68, 173, 0.3);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-name {
+            color: #b39ddb;
+            font-weight: 600;
+        }
+
+        .stat-val {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .moves-title {
+            font-size: 0.95rem;
+            color: #d1c4e9;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .moves-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-move {
+            background: #341b54;
+            border: 1px solid #8e44ad;
+            color: #f3e5f5;
+            padding: 10px 8px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-move:hover {
+            background: #7d3c98;
+            box-shadow: 0 0 10px rgba(155, 89, 182, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .console-log {
+            background: #090310;
+            border: 1px solid #5b2c6f;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 0.88rem;
+            color: #a7f3d0;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header">
+            <h1 id="mewtwo-name">Mewtwo</h1>
+            <span class="badge" id="mewtwo-type">Psíquico</span>
+        </div>
+
+        <div class="image-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" alt="Mewtwo">
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-name">Nivel:</span>
+                <span class="stat-val" id="stat-lvl">--</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-name">Naturaleza:</span>
+                <span class="stat-val" id="stat-nat">--</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-name">PS Base:</span>
+                <span class="stat-val" id="stat-hp">--</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-name">Ataque Especial:</span>
+                <span class="stat-val" id="stat-spa">--</span>
+            </div>
+        </div>
+
+        <div class="moves-title">Movimientos</div>
+        <div class="moves-list" id="moves-container"></div>
+
+        <div class="console-log" id="battle-log">Elige un movimiento de Mewtwo</div>
+    </div>
+
+    <script>
+        class Mewtwo {
+            constructor(nivel = 70, naturaleza = "Modest") {
+                this.nombre = "Mewtwo";
+                this.tipo = ["Psíquico"];
+                this.nivel = nivel;
+                this.naturaleza = naturaleza;
+                this.ps = Math.floor((106 * 2 * nivel) / 100) + nivel + 10;
+                this.ataqueEspecial = Math.floor((154 * 2 * nivel) / 100) + 5;
+                this.movimientos = ["Onda Mental", "Bola Sombra", "Recuperación", "Rayo Hielo"];
+            }
+
+            atacar(movimiento) {
+                if (this.movimientos.includes(movimiento)) {
+                    return `¡${this.nombre} usó ${movimiento} con ${this.ataqueEspecial} de Ataque Especial!`;
+                }
+                return `${this.nombre} no conoce ese movimiento.`;
+            }
+        }
+
+        const mewtwo = new Mewtwo(100, "Timid");
+
+        document.getElementById("mewtwo-name").innerText = mewtwo.nombre;
+        document.getElementById("mewtwo-type").innerText = mewtwo.tipo.join(" / ");
+        document.getElementById("stat-lvl").innerText = mewtwo.nivel;
+        document.getElementById("stat-nat").innerText = mewtwo.naturaleza;
+        document.getElementById("stat-hp").innerText = mewtwo.ps;
+        document.getElementById("stat-spa").innerText = mewtwo.ataqueEspecial;
+
+        const log = document.getElementById("battle-log");
+        const movesContainer = document.getElementById("moves-container");
+
+        mewtwo.movimientos.forEach(mov => {
+            const btn = document.createElement("button");
+            btn.className = "btn-move";
+            btn.innerText = mov;
+            btn.onclick = () => {
+                log.innerText = mewtwo.atacar(mov);
+            };
+            movesContainer.appendChild(btn);
+        });
+    </script>
+</body>
+</html>
